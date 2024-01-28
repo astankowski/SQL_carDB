@@ -36,6 +36,14 @@ JOIN Manufacturer m ON c.ManufacturerID = m.ManufacturerID
 JOIN Engine e ON c.EngineID = e.EngineID
 GROUP BY m.ManufacturerID, m.Name;
 
+SELECT Make, Model
+FROM Cars c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Owner o
+    WHERE o.OwnerID = c.OwnerID
+);
+
 UPDATE Cars
 SET Cost = 30000
 WHERE ManufacturerID = 2 AND Model = 'Mustang' AND Version = 'GT';
